@@ -56,6 +56,15 @@ class MainActivity : AppCompatActivity() {
             //val inputStreamReader = InputStreamReader(inputStream)
            // val reader = BufferedReader(inputStreamReader)
             val reader = BufferedReader(InputStreamReader(connection.inputStream))
+
+            val inputBuffer = CharArray(500)
+            var CharRead = 0
+            while (CharRead>= 0 ){
+                CharRead = reader.read(inputBuffer)
+                if (CharRead > 0){
+                    xmlResult.append(String(inputBuffer,0,CharRead ))
+                }
+            }
         } catch (e: MalformedURLException) {
             Log.e(TAG, "downloadXML: Invalid URL ${e.message}")
         } catch (e: IOException) {
