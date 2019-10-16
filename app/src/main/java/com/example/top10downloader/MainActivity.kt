@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "onPostExecute: parameter is $result")
             }
 
-            override fun doInBackground(vararg p0: String?): String {
-                Log.d(TAG, "doInBackground: starts with ${p0[0]}")
+            override fun doInBackground(vararg url: String?): String {
+                Log.d(TAG, "doInBackground: starts with ${url[0]}")
                 return "doInBackground completed"
             }
         }
