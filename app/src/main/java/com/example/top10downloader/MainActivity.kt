@@ -29,7 +29,11 @@ class MainActivity : AppCompatActivity() {
 
             override fun doInBackground(vararg url: String?): String {
                 Log.d(TAG, "doInBackground: starts with ${url[0]}")
-                return "doInBackground completed"
+                val rssFeed = downloadXML(url[0])
+                if (rssFeed.isEapty()){
+                    Log.d(TAG,"doInBackground:Eror downloading")
+                }
+                return rssFeed
             }
         }
     }
