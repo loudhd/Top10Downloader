@@ -65,6 +65,11 @@ class MainActivity : AppCompatActivity() {
                     xmlResult.append(String(inputBuffer,0,CharRead ))
                 }
             }
+            reader.close()
+
+            Log.d(TAG,"Receivved ${xmlResult.length} bytes")
+            return xmlResult.toString()
+
         } catch (e: MalformedURLException) {
             Log.e(TAG, "downloadXML: Invalid URL ${e.message}")
         } catch (e: IOException) {
@@ -72,6 +77,7 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e(TAG, "Unknown error: ${e.message}")
         }
+        return ""
     }
 
 
