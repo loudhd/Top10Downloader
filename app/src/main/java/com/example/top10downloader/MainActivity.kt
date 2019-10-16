@@ -72,9 +72,9 @@ class MainActivity : AppCompatActivity() {
                     Log.e(TAG, "downloadXML: Invalid URL ${e.message}")
                 } catch (e: IOException) {
                     Log.e(TAG, "downloadXML: IO Exception reading data: ${e.message}")
-                } catch (e: Exception) {
-                    Log.e(TAG, "Unknown error: ${e.message}")
-                }
+                } //catch (e: Exception) {
+                    //Log.e(TAG, "Unknown error: ${e.message}")
+                //}
                 return ""
             }
 
