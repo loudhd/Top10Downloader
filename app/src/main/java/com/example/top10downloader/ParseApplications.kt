@@ -22,7 +22,7 @@ class ParseApplications {
             var eventType = xpp.eventType
             var currentRecord = FeedEntry()
             while (eventType != XmlPullParser.END_DOCUMENT) {
-                val tagName = xpp.name.toLowerCase()    // TODO: we should use the safe-call operator ?
+                val tagName = xpp.name.toLowerCase()    
                 when (eventType) {
 
                     XmlPullParser.START_TAG -> {
@@ -57,7 +57,7 @@ class ParseApplications {
                 // Nothing else to do.
                 eventType = xpp.next()
             }
-            
+
 
         } catch (e: Exception) {
             e.printStackTrace()
