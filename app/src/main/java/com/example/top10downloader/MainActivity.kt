@@ -52,9 +52,10 @@ class MainActivity : AppCompatActivity() {
             val response = connection.responseCode
             Log.d(TAG, "downloadXML: The response code was $response")
 
-            val inputStream = connection.inputStream
-            val inputStreamReader = InputStreamReader(inputStream)
-            val reader = BufferedReader(inputStreamReader)
+           // val inputStream = connection.inputStream
+            //val inputStreamReader = InputStreamReader(inputStream)
+           // val reader = BufferedReader(inputStreamReader)
+            val reader = BufferedReader(InputStreamReader(connection.inputStream))
         } catch (e: MalformedURLException) {
             Log.e(TAG, "downloadXML: Invalid URL ${e.message}")
         } catch (e: IOException) {
