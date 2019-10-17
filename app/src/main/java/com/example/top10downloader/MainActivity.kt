@@ -39,6 +39,9 @@ class MainActivity : AppCompatActivity() {
   private var downloadData: DownloadData? = null
     private var feedUrl: String= "http://ax.itumes.appie.com/WebObjects/M25toreServices.woa/ws/RSS/topfreeapplications/limit=10/xml"
     private var feedLimit = 10
+    private var feedCachedUrl = "INVALIDATED"
+    private val STATE_URL = "feedUrl"
+    private val STATE_LIMIT = "feedLimit"
     @RequiresApi(Build.VERSION_CODES.CUPCAKE)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         }else{
             menu?.findItem(R.id.mnu25)?.isChecked = true
         }
-        
+
         return  true
     }
 
