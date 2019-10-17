@@ -23,18 +23,20 @@ class FeedEntry {
     var summary: String = ""
     var imageURL: String = ""
 
-    override fun toString(): String {
+    /*override fun toString(): String {
         return """
             name = $name
             artist = $artist
             releaseDate = $releaseDate
             imageURL = $imageURL
         """.trimIndent()
-    }
+    }*/
 }
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
+
+    private  val downloadData = DownloadData(this, xmlListView)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,11 @@ class MainActivity : AppCompatActivity() {
         val downloadData = DownloadData(this, xmlListView)
         downloadData.execute("http://ax.itumes.appie.com/WebObjects/M25toreServices.woa/ws/RSS/topfreeapplications/limit=10/xml")
         Log.d(TAG, "onCreate: done")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        downloadData.cancel(true)
     }
 
     companion object {
