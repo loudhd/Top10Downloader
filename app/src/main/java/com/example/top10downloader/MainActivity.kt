@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         Log.d(TAG, "onCreate called")
         val downloadData = DownloadData(this, xmlListView)
-        downloadData.execute("URL goes here")
+        downloadData.execute("http://ax.itumes.appie.com/WebObjects/M25toreServices.woa/ws/RSS/topfreeapplications/limit=10/xml")
         Log.d(TAG, "onCreate: done")
     }
 
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 val parseApplications = ParseApplications()
                 parseApplications.parse(result)
 
-                val arrayAdaptor = ArrayAdapter<FeedEntry>(propContext,R.layout.list_item, parseApplications.application)
+                val arrayAdaptor = ArrayAdapter<FeedEntry>(propContext,R.layout.list_item, parseApplications.applications)
                 propListView.adapter = arrayAdaptor
             }
 
