@@ -1,15 +1,21 @@
 package com.example.top10downloader
 
+import android.content.Context
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
+import kotlin.properties.Delegates
+
 class FeedEntry {
     var name: String = ""
     var artist: String = ""
@@ -35,14 +41,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Log.d(TAG, "onCreate called")
-        val downloadData = DownloadData()
+        val downloadData = DownloadData(this, xmlListView)
         downloadData.execute("URL goes here")
         Log.d(TAG, "onCreate: done")
     }
 
     companion object {
-        private class DownloadData : AsyncTask<String, Void, String>() {
+        private class DownloadData(context: Context,ListView: ListView) : AsyncTask<String, Void, String>() {
             private val TAG = "DownloadData"
+            var propContext:Context by Delegates.notNull()
+            var propListView: ListView by Delegates.notNull()
 
             override fun onPostExecute(result: String) {
                 super.onPostExecute(result)
@@ -50,6 +58,7 @@ class MainActivity : AppCompatActivity() {
                 val parseApplications = ParseApplications()
                 parseApplications.parse(result)
             }
+            val arrayAdaptor = ArrayAdapter<FeedEntry>()
 
             override fun doInBackground(vararg url: String?): String {
                 Log.d(TAG, "doInBackground: starts with ${url[0]}")
