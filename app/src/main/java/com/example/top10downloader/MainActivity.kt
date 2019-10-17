@@ -35,9 +35,7 @@ class FeedEntry {
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
 
-    @RequiresApi(Build.VERSION_CODES.CUPCAKE)
-    private  val downloadData = DownloadData(this, xmlListView)
-
+  private var downloadData: DownloadData? = null
     @RequiresApi(Build.VERSION_CODES.CUPCAKE)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +47,8 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.CUPCAKE)
     private fun downloadUrl(feedURL: String){
         Log.d(TAG,"downlaodUrl starting AsyncTask")
-        downloadData.execute(feedURL)
+        downloadData = DownloadData(this,xmlListView)
+        downloadData?.execute(feedURL)
         Log.d(TAG,"downloadUrl done")
     }
 
@@ -117,6 +116,10 @@ class MainActivity : AppCompatActivity() {
 
             private fun downloadXML(urlPath: String?): String {
             return URL(urlPath).readText()
+            }
+
+            operator fun invoke(feedUrl: String) {
+
             }
         }
     }
