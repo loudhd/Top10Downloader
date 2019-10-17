@@ -58,6 +58,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         return super.onCreateOptionsMenu(menu)
+
+        if (feedLimit == 10){
+            menu?.findItem(R.id.mnu10)?.isChecked = true
+        }else{
+            menu?.findItem(R.id.mnu25)?.isChecked = true
+        }
+        
         return  true
     }
 
