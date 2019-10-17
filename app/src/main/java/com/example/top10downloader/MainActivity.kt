@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         return  true
     }
 
+    @RequiresApi(Build.VERSION_CODES.CUPCAKE)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val feedUrl: String
         when(item.itemId){
@@ -70,21 +71,20 @@ class MainActivity : AppCompatActivity() {
             else ->
                 return super.onOptionsItemSelected(item)
         }
-        downloadData(feedUrl)
+
+        downloadUrl(feedUrl)
         return true
     }
 
     @RequiresApi(Build.VERSION_CODES.CUPCAKE)
     override fun onDestroy() {
         super.onDestroy()
-        downloadData.cancel(true)
+        downloadData?.cancel(true)
     }
 
     companion object {
         @RequiresApi(Build.VERSION_CODES.CUPCAKE)
-        private class DownloadData(
-            context: Context,
-            ListView: ConstraintLayout
+        private class DownloadData(context: Context,listView: ListView
         ) : AsyncTask<String, Void, String>() {
             private val TAG = "DownloadData"
             var propContext:Context by Delegates.notNull()
