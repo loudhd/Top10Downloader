@@ -62,8 +62,10 @@ class MainActivity : AppCompatActivity() {
                 //Log.d(TAG, "onPostExecute: parameter is $result")
                 val parseApplications = ParseApplications()
                 parseApplications.parse(result)
+
+                val arrayAdaptor = ArrayAdapter<FeedEntry>(propContext,R.layout.list_item, parseApplications.application)
+                propListView.adapter = arrayAdaptor
             }
-            val arrayAdaptor = ArrayAdapter<FeedEntry>(propContext,R.layout.list_item, parseApplications.applicationtions)
 
             override fun doInBackground(vararg url: String?): String {
                 Log.d(TAG, "doInBackground: starts with ${url[0]}")
