@@ -95,12 +95,18 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG,"onOptionItemSelected: ${item.title} setting feedLimit unchanged")
                 }
             }
+            R.id.mnuRefresh->feedCachedUrl="INVALIDATED"
             else ->
                 return super.onOptionsItemSelected(item)
         }
 
         downloadUrl(feedUrl.format(feedLimit))
         return true
+    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(STATE_URL, feedUrl)
+        outState.putInt(STATE_LIMIT, feedLimit)
     }
 
     @RequiresApi(Build.VERSION_CODES.CUPCAKE)
