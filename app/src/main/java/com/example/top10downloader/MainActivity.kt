@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ListView
+import android.widget.TabHost
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.activity_main.*
@@ -69,6 +70,15 @@ class MainActivity : AppCompatActivity() {
                 feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/toppaidapplications/limit=10/xml"
             R.id.mnuSongs->
                 feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topsongs/limit=10/xml"
+            R.id.mnu10,R.id.mnu25->{
+                if (!item.isChecked){
+                    item.isChecked = true
+                    feedLimit = 35 - feedLimit
+                    Log.d(TAG,"onOptionsItemSelected: ${item.title} setting feedLimit to $feedLimit")
+                }else{
+                    Log.d(TAG,"onOptionItemSelected: ${item.title} setting feedLimit unchanged")
+                }
+            }
             else ->
                 return super.onOptionsItemSelected(item)
         }
