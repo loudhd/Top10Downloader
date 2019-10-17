@@ -36,12 +36,14 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
 
   private var downloadData: DownloadData? = null
+    private var feedUrl: String= "http://ax.itumes.appie.com/WebObjects/M25toreServices.woa/ws/RSS/topfreeapplications/limit=10/xml"
+    private var feedLimit = 10
     @RequiresApi(Build.VERSION_CODES.CUPCAKE)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        downloadUrl("http://ax.itumes.appie.com/WebObjects/M25toreServices.woa/ws/RSS/topfreeapplications/limit=10/xml")
+        downloadUrl(feedUrl.format(feedLimit))
         Log.d(TAG, "onCreate: done")
     }
     @RequiresApi(Build.VERSION_CODES.CUPCAKE)
@@ -60,7 +62,6 @@ class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.CUPCAKE)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val feedUrl: String
         when(item.itemId){
             R.id.mnuFree->
                 feedUrl = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/xml"
@@ -72,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 return super.onOptionsItemSelected(item)
         }
 
-        downloadUrl(feedUrl)
+        downloadUrl(feedUrl.format(feedLimit))
         return true
     }
 
