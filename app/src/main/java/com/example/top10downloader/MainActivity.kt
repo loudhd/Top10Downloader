@@ -52,13 +52,18 @@ class MainActivity : AppCompatActivity() {
             var propContext:Context by Delegates.notNull()
             var propListView: ListView by Delegates.notNull()
 
+            init {
+                propContext = context
+                propListView = ListView
+            }
+
             override fun onPostExecute(result: String) {
                 super.onPostExecute(result)
                 //Log.d(TAG, "onPostExecute: parameter is $result")
                 val parseApplications = ParseApplications()
                 parseApplications.parse(result)
             }
-            val arrayAdaptor = ArrayAdapter<FeedEntry>()
+            val arrayAdaptor = ArrayAdapter<FeedEntry>(propContext,R.layout.list_item, parseApplications.applicationtions)
 
             override fun doInBackground(vararg url: String?): String {
                 Log.d(TAG, "doInBackground: starts with ${url[0]}")
