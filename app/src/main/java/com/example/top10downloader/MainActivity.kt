@@ -48,14 +48,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         downloadUrl(feedUrl.format(feedLimit))
+
         Log.d(TAG, "onCreate: done")
     }
     @RequiresApi(Build.VERSION_CODES.CUPCAKE)
     private fun downloadUrl(feedURL: String){
-        Log.d(TAG,"downlaodUrl starting AsyncTask")
-        downloadData = DownloadData(this,xmlListView)
-        downloadData?.execute(feedURL)
-        Log.d(TAG,"downloadUrl done")
+        if (feedUrl != feedCachedUrl) {
+            Log.d(TAG, "downloadUrl starting AsyncTask")
+            downloadData = DownloadData(this, xmlListView)
+            downloadData?.execute(feedUrl)
+            feedCachedUrl = feedUrl
+            Log.d(TAG, "downloadUrl done")
+        } else {
+            Log.d(TAG, "downloadUrl - URL not changed")
+        }
     }
 
 
