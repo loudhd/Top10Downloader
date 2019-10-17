@@ -47,8 +47,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        downloadUrl(feedUrl.format(feedLimit))
+        Log.d(TAG, "onCreate called")
 
+        if (savedInstanceState != null) {
+            feedUrl = savedInstanceState.getString(STATE_URL)
+            feedLimit = savedInstanceState.getInt(STATE_LIMIT)
+        }
+
+        downloadUrl(feedUrl.format(feedLimit))
         Log.d(TAG, "onCreate: done")
     }
     @RequiresApi(Build.VERSION_CODES.CUPCAKE)
